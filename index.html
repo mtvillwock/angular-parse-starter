@@ -1,44 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-
-  <title>My Parse App</title>
-  <meta name="description" content="My Parse App">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+<script src="http://www.parsecdn.com/js/parse-1.2.12.min.js"></script>
+<meta charset=utf-8 />
+<title>Example</title>
 </head>
+<body ng-app="AuthApp">
+  <div ng-hide="currentUser">
+    <form ng-show="scenario == 'Sign up'">
+      <h2>Sign up</h2>
+      Email: <input type="email" ng-model="user.email" /><br />
+      Username: <input type="text" ng-model="user.username" /><br />
+      Password: <input type="password" ng-model="user.password" /><br />
+      <button ng-click="signUp(user)">Sign up</button>
+      or <a href="#" ng-click='scenario="Log in"'>Log in</a>
+    </form>
 
-<body>
-
-  <div id="main">
-    <h1>You're ready to use Parse!</h1>
-
-    <p>Read the documentation and start building your JavaScript app:</p>
-
-    <ul>
-      <li><a href="https://www.parse.com/docs/js_guide">Parse JavaScript Guide</a></li>
-      <li><a href="https://www.parse.com/docs/js">Parse JavaScript API Documentation</a></li>
-    </ul>
-
-    <div style="display:none" class="error">
-      Looks like there was a problem saving the test object. Make sure you've set your application ID and javascript key correctly in the call to <code>Parse.initialize</code> in this file.
-    </div>
-
-    <div style="display:none" class="success">
-      <p>We've also just created your first object using the following code:</p>
-
-        <code>
-          var TestObject = Parse.Object.extend("TestObject");<br/>
-          var testObject = new TestObject();<br/>
-          testObject.save({foo: "bar"});
-        </code>
-    </div>
+    <form ng-show="scenario == 'Log in'">
+      <h2>Log in</h2>
+      Username: <input type="text" ng-model="user.username" /><br />
+      Password: <input type="password" ng-model="user.password" /><br />
+      <button ng-click="logIn(user)">Log in</button>
+      or <a href="#" ng-click='scenario="Sign up"'>Sign up</a>
+    </form>
   </div>
 
-  <script type="text/javascript" src="parse.js"></script>
+  <div ng-show="currentUser">
+    <h1>Welcome {{currentUser.get('username')}}</h1>
+    <p> You have been successfully logged in</p>
+    <button ng-click="logOut(user)">Log out</button>
+  </div>
 </body>
-
 </html>
+
+
