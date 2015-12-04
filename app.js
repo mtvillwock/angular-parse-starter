@@ -1,6 +1,7 @@
-Parse.initialize("YJwHjwYF08scjC2SEdl9Ve2YFB3056FQfkUgGu8p", "awDPDR2YNfZNtbJ54VzEZPiWJZmLekU8qkJxnlOw");
+// initialize Parse with Javascript Key and Application ID key
+Parse.initialize("bYRCHbq0EJhEWnMuoOOhmiZJAtwwyZ5vye6buY9c", "EQWXh2GKp22bzLZDbJ2PpKd5XCfOkpM2Kvshou2l");
 
-angular.module('AuthApp', [])
+angular.module('parseAuth', [])
 .run(['$rootScope', function($scope) {
   $scope.scenario = 'Sign up';
   $scope.currentUser = Parse.User.current();
