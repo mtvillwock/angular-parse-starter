@@ -5,12 +5,12 @@ angular.module('parseAuth')
             $scope.createPost = function(post) {
               console.log("your post:", post);
                 var Post = Parse.Object.extend("Post");
-                var post = new Post();
+                var newpost = new Post();
 
-                post.set("title", post.title);
-                post.set("body", post.body);
+                newpost.set("title", post.title);
+                newpost.set("body", post.body);
 
-                post.save(null, {
+                newpost.save(null, {
                     success: function(post) {
                       console.log("success post", post);
                         // Execute any logic that should take place after the object is saved.
@@ -24,6 +24,5 @@ angular.module('parseAuth')
                     }
                 });
             }
-
         }
     ])
