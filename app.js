@@ -1,4 +1,4 @@
-// initialize Parse with Javascript Key and Application ID key
+// initialize Parse with Application ID and Javascript Key
 Parse.initialize("bYRCHbq0EJhEWnMuoOOhmiZJAtwwyZ5vye6buY9c", "EQWXh2GKp22bzLZDbJ2PpKd5XCfOkpM2Kvshou2l");
 
 angular.module('parseAuth', [])
@@ -11,6 +11,9 @@ angular.module('parseAuth', [])
     user.set("email", form.email);
     user.set("username", form.username);
     user.set("password", form.password);
+    // set other User values here
+    // user.set("attributeName", attributeValue)
+    user.set("phone", "0123-4567")
 
     user.signUp(null, {
       success: function(user) {
