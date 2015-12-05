@@ -35,6 +35,4 @@ Now that we have our app connected to Parse, let's try using it!
 
 ### Stretch: Add another resource
 
-TODO:
-[ ] Add information about building out the rest of the boilerplate app.
-[ ] Add instructions about making a new model and controller for posting/querying data.
+Instructions on associating objects to users pending.
