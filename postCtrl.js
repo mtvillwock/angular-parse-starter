@@ -4,18 +4,21 @@ angular.module('parseAuth')
 
             $scope.createPost = function(post) {
               console.log("your post:", post);
+                // define Post object in Parse DB
                 var Post = Parse.Object.extend("Post");
-                var post = new Post();
+                // instantiate Post object instance
+                var newPost = new Post();
+                // set values for Post attributes
+                newPost.set("title", post.title);
+                newPost.set("body", post.body);
+                // clear input fields
+                $scope.post = {};
 
-                post.set("title", post.title);
-                post.set("body", post.body);
-
-                post.save(null, {
+                newPost.save(null, {
                     success: function(post) {
                       console.log("success post", post);
                         // Execute any logic that should take place after the object is saved.
                         console.log('New object created with objectId: ' + post.id);
-                        $scope.post = {};
                     },
                     error: function(post, error) {
                         // Execute any logic that should take place if the save fails.
