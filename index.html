@@ -39,9 +39,10 @@
     <div class="posts" ng-controller="PostsCtrl">
       <div ng-if="currentUser">
         <h3>Make a post</h3>
-        Title: <input type="text" ng-model="post.title" /><br/>
-        Body: <input type="text" ng-model="post.body" /><br />
-        <button ng-click="createPost(post)">Make Post</button>
+        Title: <input type="text" ng-model="newPost.title" /><br/>
+        Body: <input type="text" ng-model="newPost.body" /><br />
+        <button ng-click="createPost(newPost)">Make Post</button>
+        Your pending post is: {{ newPost }}
       </div>
       <h3>Posts:</h3>
       <!--  {{ posts }} -->

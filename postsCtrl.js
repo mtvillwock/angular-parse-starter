@@ -18,6 +18,7 @@ angular.module('parseAuth')
                         };
                         allPosts.unshift(foundPost);
                     }
+                    // necessary to get posts to load on page
                     $scope.$apply();
                     console.log("allPosts is:", allPosts);
                     $scope.posts = allPosts;
@@ -32,8 +33,11 @@ angular.module('parseAuth')
             function createPostSuccess(post) {
                 // console.log("success post", post);
                 // Execute any logic that should take place after the object is saved.
-                $scope.$apply();
                 console.log('New object created with objectId: ' + post.id);
+                // clear input fields
+                $scope.newPost = {};
+
+                $scope.getPosts();
                 $scope.getPosts();
             }
 
@@ -67,11 +71,9 @@ angular.module('parseAuth')
 
                 newPost.save()
                     .then(createPostSuccess, createPostError);
-                // clear input fields
-                $scope.post = {};
             };
 
-            // fetch posts when controller loads
+            // fetch posts when controller loads (yes, twice)
             $scope.getPosts();
         }
     ]);
