@@ -1,5 +1,7 @@
 // initialize Parse with Application ID and Javascript Key
-Parse.initialize("bYRCHbq0EJhEWnMuoOOhmiZJAtwwyZ5vye6buY9c", "EQWXh2GKp22bzLZDbJ2PpKd5XCfOkpM2Kvshou2l");
+// ben:  Parse.initialize("CCrrZJCx7GAwrKy3ybIJg5qDjpiZVZj3QYpXakzt", "GVy024wuNobVdxSg4cR9FyXPbeZFGTsn7C7eZPLy");
+Parse.initialize("CCrrZJCx7GAwrKy3ybIJg5qDjpiZVZj3QYpXakzt", "GVy024wuNobVdxSg4cR9FyXPbeZFGTsn7C7eZPLy");
+
 
 angular.module('parseAuth', [])
 .run(['$rootScope', function($scope) {
