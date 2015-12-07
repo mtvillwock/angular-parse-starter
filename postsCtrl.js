@@ -9,15 +9,15 @@ angular.module('parseAuth')
                 var allPosts = [];
                 if (results.length === 0) {
                     console.log("There are no posts yet.");
+                    $scope.posts = [];
+                    $scope.$apply();
                 } else {
                     for (var i = 0; i < results.length; i++) {
-                        var object = results[i];
-                        var foundPost = {
-                            id: object.id,
-                            title: object.get('title'),
-                            body: object.get('body')
-                        };
-                        allPosts.unshift(foundPost);
+                        var post = results[i];
+                        console.log(post)
+                        // post has id, attributes
+                        // attributes include title and body
+                        allPosts.unshift(post);
                     }
                     // necessary to get posts to load on page
                     console.log("allPosts is:", allPosts);
@@ -72,5 +72,25 @@ angular.module('parseAuth')
                 newPost.save()
                     .then(createPostSuccess, createPostError);
             };
+
+            $scope.deletePost = function(postId) {
+                var Post = Parse.Object.extend("Post");
+                var query = new Parse.Query(Post);
+                query.get(postId)
+                    .then(function(post) {
+                        // The object was retrieved successfully.
+                        post.destroy()
+                            .then(function(post) {
+                                $scope.getPosts();
+                                console.log("post destroyed: ", post)
+                            }, function(post, error) {
+                                console.log("error deleting post:", error, post)
+                            })
+                    }, function(error) {
+                        console.log("error retrieving post");
+                        // The object was not retrieved successfully.
+                        // error is a Parse.Error with an error code and description.
+                    })
+            }
         }
     ]);
