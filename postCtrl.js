@@ -48,6 +48,7 @@ angular.module('parseAuth')
                 newPost.set("title", post.title);
                 newPost.set("body", post.body);
                 // clear input fields
+                post = {};
                 $scope.post = {};
                 newPost.save(null, {
                     success: function(post) {
