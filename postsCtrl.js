@@ -1,6 +1,7 @@
 angular.module('parseAuth')
     .controller("PostsCtrl", ['$scope',
         function($scope) {
+            $scope.newPost = {};
             ///////////////////////////////////////
             // callbacks for handling Parse queries
             ///////////////////////////////////////
