@@ -1,6 +1,6 @@
 angular.module('parseAuth')
-    .controller("PostsCtrl", ['$scope',
-        function($scope) {
+    .controller("PostsCtrl", ['$scope', 'Post',
+        function($scope, Post) {
             $scope.newPost = {};
             ///////////////////////////////////////
             // callbacks for handling Parse queries
@@ -52,11 +52,7 @@ angular.module('parseAuth')
             ///////////////////////////////////////
 
             $scope.getPosts = function() {
-                var Post = Parse.Object.extend("Post");
-                var newpost = new Post();
-
-                var query = new Parse.Query(Post);
-                query.find()
+                Post.all()
                     .then(getPostsSuccess, getPostsError)
             };
 
@@ -68,6 +64,7 @@ angular.module('parseAuth')
                 var newPost = new Post(); // instantiate Post object instance
                 newPost.set("title", post.title);
                 newPost.set("body", post.body);
+                newPost.set("createdBy", Parse.User.current());
 
                 newPost.save()
                     .then(createPostSuccess, createPostError);
