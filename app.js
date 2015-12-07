@@ -13,7 +13,7 @@ angular.module('parseAuth', [])
     user.set("password", form.password);
     // set other User values here
     // user.set("attributeName", attributeValue)
-    user.set("phone", "0123-4567")
+    // user.set("phone", "000-123-4567");
 
     user.signUp(null, {
       success: function(user) {

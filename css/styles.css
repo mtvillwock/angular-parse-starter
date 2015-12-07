@@ -4,6 +4,9 @@ body {
     padding: 0 25px;
 }
 
+button {
+    font-size: 93%;
+}
 #main {
     width: 500px;
     margin: auto;
@@ -37,4 +40,15 @@ body {
     font-size: 12px;
     color: green;
     line-height: 13px;
+}
+
+.edit-btn {
+    float: right;
+    clear: left;
+    margin-top: 20px;
+}
+.post {
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 0 10px;
 }
