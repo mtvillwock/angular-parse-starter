@@ -20,9 +20,9 @@ angular.module('parseAuth')
                         allPosts.unshift(foundPost);
                     }
                     // necessary to get posts to load on page
-                    $scope.$apply();
                     console.log("allPosts is:", allPosts);
                     $scope.posts = allPosts;
+                    $scope.$apply();
                     console.log("$scope.posts is: ", $scope.posts);
                 }
             }
@@ -38,7 +38,6 @@ angular.module('parseAuth')
                 // clear input fields
                 $scope.newPost = {};
 
-                $scope.getPosts();
                 $scope.getPosts();
             }
 
@@ -73,8 +72,5 @@ angular.module('parseAuth')
                 newPost.save()
                     .then(createPostSuccess, createPostError);
             };
-
-            // fetch posts when controller loads (yes, twice)
-            $scope.getPosts();
         }
     ]);
