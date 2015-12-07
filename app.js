@@ -1,7 +1,5 @@
 // initialize Parse with Application ID and Javascript Key
-// ben:  Parse.initialize("CCrrZJCx7GAwrKy3ybIJg5qDjpiZVZj3QYpXakzt", "GVy024wuNobVdxSg4cR9FyXPbeZFGTsn7C7eZPLy");
-Parse.initialize("CCrrZJCx7GAwrKy3ybIJg5qDjpiZVZj3QYpXakzt", "GVy024wuNobVdxSg4cR9FyXPbeZFGTsn7C7eZPLy");
-
+Parse.initialize("bYRCHbq0EJhEWnMuoOOhmiZJAtwwyZ5vye6buY9c", "EQWXh2GKp22bzLZDbJ2PpKd5XCfOkpM2Kvshou2l");
 
 angular.module('parseAuth', [])
 .run(['$rootScope', function($scope) {
@@ -15,7 +13,7 @@ angular.module('parseAuth', [])
     user.set("password", form.password);
     // set other User values here
     // user.set("attributeName", attributeValue)
-    user.set("phone", "0123-4567")
+    // user.set("phone", "000-123-4567");
 
     user.signUp(null, {
       success: function(user) {
