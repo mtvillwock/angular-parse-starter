@@ -37,6 +37,7 @@
 
 
     <div class="posts" ng-controller="PostsCtrl">
+      {{ posts }}
       <div ng-if="currentUser">
         <h3>Make a post</h3>
         Title: <input type="text" ng-model="post.title" /><br />
@@ -53,7 +54,7 @@
     </div>
   </div>
   <script src="app.js"></script>
-  <script src="postCtrl.js"></script>
+  <script src="postsCtrl.js"></script>
 </body>
 </html>
 
