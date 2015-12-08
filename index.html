@@ -45,7 +45,6 @@
         Your pending post is: {{ newPost }}
       </div>
       <h3>Posts:</h3>
-      <!--  {{ posts }} -->
       <div class="post" ng-repeat="post in posts">
         <button class="edit-btn" ng-if="currentUser">Edit</button>
         <button class="delete-btn" ng-if="currentUser" ng-click="deletePost(post.id)">Delete post {{ post.id }}</button>

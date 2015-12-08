@@ -13,15 +13,11 @@ angular.module('parseAuth')
                     $scope.$apply();
                 } else {
                     for (var i = 0; i < results.length; i++) {
-                        var post = results[i];
-                        console.log(post)
-                        // post has id, attributes
-                        // attributes include title and body
+                        var post = results[i]; // post = { id: "string", attributes: {title: "sometitle", body: "text"} }
                         allPosts.unshift(post);
                     }
-                    // necessary to get posts to load on page
-                    console.log("allPosts is:", allPosts);
                     $scope.posts = allPosts;
+                    // necessary to refresh $scope with all posts
                     $scope.$apply();
                     console.log("$scope.posts is: ", $scope.posts);
                 }
@@ -32,13 +28,9 @@ angular.module('parseAuth')
             }
 
             function createPostSuccess(post) {
-                // console.log("success post", post);
-                // Execute any logic that should take place after the object is saved.
                 console.log('New object created with objectId: ' + post.id);
-                // clear input fields
-                $scope.newPost = {};
-
-                $scope.getPosts();
+                $scope.newPost = {}; // clear input fields
+                $scope.getPosts(); // refresh $scope.posts
             }
 
             function createPostError(post, error) {
@@ -57,37 +49,36 @@ angular.module('parseAuth')
             };
 
             // fetch all posts on controller load
-            $scope.getPosts();
+            // $scope.getPosts();
 
             $scope.createPost = function(post) {
-                var Post = Parse.Object.extend("Post"); // define Post object in Parse DB
-                var newPost = new Post(); // instantiate Post object instance
-                newPost.set("title", post.title);
-                newPost.set("body", post.body);
-                newPost.set("createdBy", Parse.User.current());
-
-                newPost.save()
+                Post.save(post)
                     .then(createPostSuccess, createPostError);
             };
 
+            // Example where this isn't extracting the success/error callbacks
             $scope.deletePost = function(postId) {
-                var Post = Parse.Object.extend("Post");
-                var query = new Parse.Query(Post);
-                query.get(postId)
-                    .then(function(post) {
-                        // The object was retrieved successfully.
-                        post.destroy()
-                            .then(function(post) {
-                                $scope.getPosts();
-                                console.log("post destroyed: ", post)
-                            }, function(post, error) {
-                                console.log("error deleting post:", error, post)
-                            })
-                    }, function(error) {
-                        console.log("error retrieving post");
-                        // The object was not retrieved successfully.
-                        // error is a Parse.Error with an error code and description.
+                Post.destroy()
+                    .then(function deleteSuccess(post) {
+                        $scope.getPosts();
+                        console.log("post destroyed: ", post)
+                    }, function deleteFail(post, error) {
+                        console.log("error deleting post:", error, post)
                     })
             }
-        }
+
+            // Listening for user logging in to populate posts
+            $scope.$on("logged_in", function(event, message) {
+                $scope.message = message;
+                console.log("logged in message is:", $scope.message);
+                $scope.getPosts();
+            });
+
+            // Listening for logout from root scope controller, clears posts
+            $scope.$on("logged_out", function(event, message) {
+                $scope.message = message;
+                console.log("logged out message is:", $scope.message);
+                $scope.posts = [];
+            });
+        } // END POST CONTROLLER
     ]);
