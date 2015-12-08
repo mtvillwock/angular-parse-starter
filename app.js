@@ -47,6 +47,6 @@ angular.module('parseAuth', [])
                 $scope.message = "User logged out";
                 $scope.$broadcast('logged_out', $scope.message);
             };
-
+        // END ROOT CONTROLLER
         }
     ]);

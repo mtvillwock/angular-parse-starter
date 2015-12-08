@@ -2,12 +2,6 @@ angular.module('parseAuth')
     .factory('Post', function() {
         var factory = {};
 
-        factory.get = function(postId) {
-            var Post = Parse.Object.extend("Post");
-            var query = new Parse.Query(Post);
-            return query.get()
-        }
-
         factory.all = function() {
             var Post = Parse.Object.extend("Post");
             var query = new Parse.Query(Post);
@@ -24,15 +18,20 @@ angular.module('parseAuth')
             return newPost.save()
         }
 
-        factory.destroy = function(postId) {
-            factory.get(postId)
+        factory.destroy = function(postId, success, err) {
+            var Post = Parse.Object.extend("Post");
+            var query = new Parse.Query(Post);
+            query.get(postId)
                 .then(function(post) {
-                    return post.destroy() // When object was retrieved successfully.
-                }, function(error) {
-                    console.log("error retrieving post:", error);
-                    // logs a Parse.Error with an error code and description.
+                    post.destroy(function() {
+                        success();
+                    }, function() {
+                        console.log("error")
+                    })
+                }, function(post, error) {
+                    console.log("object and error", object, error)
                 })
-        }
+        };
         // END Post Factory
         return factory;
     })
