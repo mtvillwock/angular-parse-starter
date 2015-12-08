@@ -25,6 +25,7 @@ angular.module('parseAuth')
         }
 
         factory.destroy = function(postId) {
+            console.log(postId);
             factory.get(postId)
                 .then(function(post) {
                     return post.destroy() // When object was retrieved successfully.

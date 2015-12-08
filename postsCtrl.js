@@ -58,13 +58,13 @@ angular.module('parseAuth')
 
             // Example where this isn't extracting the success/error callbacks
             $scope.deletePost = function(postId) {
-                Post.destroy()
-                    .then(function deleteSuccess(post) {
-                        $scope.getPosts();
-                        console.log("post destroyed: ", post)
-                    }, function deleteFail(post, error) {
-                        console.log("error deleting post:", error, post)
-                    })
+                Post.destroy(postId)
+                    // .then(function deleteSuccess(postId) {
+                    //     $scope.getPosts();
+                    //     console.log("post destroyed: ", postId)
+                    // }, function deleteFail(postId, error) {
+                    //     console.log("error deleting post:", error, postId)
+                    // })
             }
 
             // Listening for user logging in to populate posts
