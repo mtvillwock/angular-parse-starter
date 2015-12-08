@@ -21,8 +21,7 @@ In order to use Parse, we'll need to register for an account and add some code t
 1. Add the keys to the `Parse.initialize()` function call in your `app.js` file.
 
 ```javascript
-Parse.initialize("ApplicationId",
-  "JavascriptKey");
+Parse.initialize("ApplicationId", "JavascriptKey");
 ```
 
 ### Using the Auth
@@ -33,6 +32,21 @@ Now that we have our app connected to Parse, let's try using it!
 1. In the Parse dashboard, click on your app name, then click "data" on the left hand side. You should see several entries, including "Role",  "Session", and "User".
 1. Click on "User" and see if your data was added to the database.
 
-### Stretch: Add another resource
+### GOTCHAS:
+Angular does not always play nicely with Parse. Here are some of the hurdles we encountered along the way:
 
-Instructions on associating objects to users pending.
+1. `$scope.$apply();` - Call Angular's `$apply` service method to apply changes to $scope on the fly. This will solve some problems but it is not a great approach, as you will learn.
+1. Store your current Parse user in the `$rootScope`
+1. `Error: ngRepeat:dupes` - This turned out to be a red herring. I added the recommended `track-by $index` but it only led to more errors. Probably a good thing to follow through and debug them until they go away, but when it was done I removed `track-by $index` and it was as if nothing ever happened.
+1. Promises, promises! Wrap parse async calls inside `$q` promises.
+
+[Here is a great article](http://tumba.solutions/blog/angularjs-and-parse) discussing some of these complexities and how one dev team worked around them. (This team used Parse, Angular and the JavaScript SDK for an iOS app. Pretty cool!)
+
+[Here is another article](http://josee.me/2013/09/30/5-tips-for-using-parse-with-angularjs/) we found useful. This article has some display problems with the way HTML entities display in the browser (`&lt;` is `less than`, `&rt;` is `greater than` and `&quot;` is exactly what it looks like).
+
+[This next article](http://popdevelop.com/2013/11/parse-com-and-angularjs-for-easy-setup-of-user-authentication/) provides source code for basic user authentication with Angular and Parse.
+
+
+### Stretch: 
+Change Delete button to Edit button and add update method
+
