@@ -49,22 +49,18 @@ angular.module('parseAuth')
             };
 
             // fetch all posts on controller load
-            // $scope.getPosts();
+            $scope.getPosts();
 
             $scope.createPost = function(post) {
                 Post.save(post)
                     .then(createPostSuccess, createPostError);
             };
 
-            // Example where this isn't extracting the success/error callbacks
             $scope.deletePost = function(postId) {
-                Post.destroy(postId)
-                    // .then(function deleteSuccess(postId) {
-                    //     $scope.getPosts();
-                    //     console.log("post destroyed: ", postId)
-                    // }, function deleteFail(postId, error) {
-                    //     console.log("error deleting post:", error, postId)
-                    // })
+                console.log("postId is: ", postId)
+                Post.destroy(postId, $scope.getPosts, function(post, error) {
+                    console.log("error deleting post:", error, post)
+                })
             }
 
             // Listening for user logging in to populate posts
