@@ -5,7 +5,7 @@ body {
 }
 
 button {
-    font-size: 93%;
+    font-size: 90s%;
 }
 #main {
     width: 500px;
@@ -42,7 +42,7 @@ button {
     line-height: 13px;
 }
 
-.edit-btn {
+.delete-btn {
     float: right;
     clear: left;
     margin-top: 20px;
